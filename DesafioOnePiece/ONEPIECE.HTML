@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Piece</title>
+</head>
+
+<body>
+    Episódio que deseja começar assistindo:
+    <input type="number" id="input_episodio_desejado"> <br>
+    Quantidade de tempo disponível:
+    <input type="number" id="input_tempo_disponivel"> <br>
+    Unidade de tempo em:
+    <select name="" id="input_unidade_tempo">
+        <option value="">Selecione uma opção</option>
+        <option value="hora">Horas</option>
+        <option value="minutos">Minutos</option>
+    </select> <br>
+    Pular abertura?
+    <select name="" id="input_pular_abertura">
+        <option value="">Selecione uma opção</option>
+        <option value="sim">Sim</option>
+        <option value="nao">Não</option>
+    </select> <br>
+    Pular Encerramento?
+    <select name="" id="input_pular_encerramento">
+        <option value="">Selecione uma opção</option>
+        <option value="sim">Sim</option>
+        <option value="nao">Não</option>
+    </select> <br>
+    <button onclick="assistirepisodio()">Assistir Episódio</button> <br>
+    <div id="div_assistirep"></div>
+
+
+
+</body>
+
+</html>
+<script>
+    function assistirepisodio() {
+        var epAtual = Number(input_episodio_desejado.value)
+        var tempoDisponivel = Number(input_tempo_disponivel.value)
+        const unidadeTempo = input_unidade_tempo.value
+        const pularAbertura = input_pular_abertura.value
+        const pularEncerramento = input_pular_encerramento.value
+
+        div_assistirep.innerHTML = ``
+
+        if (epAtual < 1 || epAtual > 1100) {
+
+            alert("O número do episódio é inválido")
+
+        } else {
+
+            if (unidadeTempo == 'hora') {
+
+                tempoDisponivel = tempoDisponivel * 60
+
+            }
+            var tempoTotalEpisodio = 20
+
+            if (pularAbertura == 'nao') {
+
+                tempoTotalEpisodio += 2
+            }
+            if (pularEncerramento == 'nao') {
+
+                tempoTotalEpisodio += 2
+            }
+
+
+            var episódiosAssistidos = 0
+            var minutosAssistidos = 0
+
+            div_assistirep.innerHTML += `Episódio: ${epAtual}<p> `
+
+            for (var minutagem = 1; minutagem <= tempoDisponivel; minutagem += 1) {
+
+                minutosAssistidos += 1
+                
+                div_assistirep.innerHTML += `<p>${minutosAssistidos} minutos assistidos`
+                    console.log(tempoTotalEpisodio)
+                if (minutosAssistidos % 24 == 0 ){
+                    episódiosAssistidos += 1
+                    epAtual += 1
+                    minutosAssistidos = 0
+
+                    div_assistirep.innerHTML += `<p>Episódio:${epAtual}`
+
+                }
+               
+            }
+            
+        }
+    }
+</script>
+
+<script>
+    /*
+    
+                     div_assistirep.innerHTML += `Minuto ${minutosAssistidos}: Assistindo Episódio`
+    
+                     if (pularAbertura == 'nao' && minutosAssistidos <= 2) {
+    
+                         div_assistirep.innerHTML += `Minuto ${minutosAssistidos}: Assistindo abertura`
+                     }
+                     if (pularEncerramento == 'nao' && minutosAssistidos > 20) {
+    
+                         div_assistirep.innerHTML += `Minuto ${minutosAssistidos}: Assistindo Encerramento`
+    
+                     }
+    
+    
+    
+                 }
+             }
+         }*/
+</script>
